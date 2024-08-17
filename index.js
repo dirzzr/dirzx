@@ -37,9 +37,27 @@ ___     /   ____/
 // [========================================] //
 async function scrapeProxy() {
   try {
-    const response = await fetch('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt');
-    const data = await response.text();
-    fs.writeFileSync('proxy.txt', data, 'utf-8');
+    const sources = [
+      'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
+      'https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&protocol=http&proxy_format=ipport&format=text&timeout=20000',
+      'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt',
+      'https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt',
+      'https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt',
+      'https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt',
+      'https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt',
+      'https://raw.githubusercontent.com/berkay-digital/Proxy-Scraper/main/proxies.txt',
+      // Tambahin URL lain di sini
+    ];
+
+    let allData = '';
+
+    for (const source of sources) {
+      const response = await fetch(source);
+      const data = await response.text();
+      allData += data + '\n'; // Gabungin semua hasil dari setiap sumber
+    }
+
+    fs.writeFileSync('proxy.txt', allData.trim(), 'utf-8');
   } catch (error) {
     console.error(`Error fetching data: ${error.message}`);
   }
