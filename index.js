@@ -90,16 +90,16 @@ async function bootup() {
     console.log(`|| ▓░░░░░░░░░ || 10%`);
     await exec(`npm i axios tls http2 hpack net cluster crypto ssh2 dgram @whiskeysockets/baileys libphonenumber-js chalk gradient-string pino mineflayer proxy-agent`)
     console.log(`|| ▓▓░░░░░░░░ || 20%`);
-    const getLatestVersion = await fetch('https://raw.githubusercontent.com/permenmd/cache/main/version.txt');
+    const getLatestVersion = await fetch('https://raw.githubusercontent.com/ridhzz122/repo/main/version.txt');
     const latestVersion = await getLatestVersion.text()
     console.log(`|| ▓▓▓░░░░░░░ || 30%`);
     if (version === latestVersion.trim()) {
     console.log(`|| ▓▓▓▓▓▓░░░░ || 60%`);
     
-    const secretBangetJir = await fetch('https://raw.githubusercontent.com/permenmd/cache/main/sigma.txt');
+    const secretBangetJir = await fetch('https://raw.githubusercontent.com/ridhzz122/repo/main/rahasia.txt');
     const password = await secretBangetJir.text();
     await console.log(`Login Key Required`)
-    permen.question('[\x1b[1m\x1b[31mPermenMD Security\x1b[0m]: \n', async (skibidi) => {
+    permen.question('[\x1b[1m\x1b[31mDirzx Security\x1b[0m]: \n', async (skibidi) => {
       if (skibidi === password.trim()) {
         console.log(`Successfuly Logged`)
         await scrapeProxy()
@@ -108,7 +108,7 @@ async function bootup() {
         console.log(`|| ▓▓▓▓▓▓▓▓▓▓ || 100%`)
         await sleep(700)
         console.clear()
-        console.log(`Welcome To PermenMD Tools ${version}`)
+        console.log(`Welcome To Dirzx Tools ${version}`)
         await sleep(1000)
 		    await banner()
         console.log(`Type "help" For Showing All Available Command`)
@@ -139,7 +139,7 @@ console.log(`
 WiFi Killer Has Started
 Type exit To Stop
 `);
-permen.question('[\x1b[1m\x1b[31mPermenMD Wifi Killer\x1b[0m]: \n', async (yakin) => {
+permen.question('[\x1b[1m\x1b[31mDirzx Wifi Killer\x1b[0m]: \n', async (yakin) => {
 if (yakin === 'exit') {
   startKillwiFi.kill('SIGKILL')
   console.log(`WiFi Killer Has Ended`)
@@ -541,7 +541,7 @@ sigma()
 };
 // [========================================] //
 async function chat_ai() {
-permen.question('[\x1b[1m\x1b[31mPermenMD Chat AI\x1b[0m]: \n', async (yakin) => {
+permen.question('[\x1b[1m\x1b[32mDirzx Chat AI\x1b[0m]: \n', async (yakin) => {
 if (yakin === 'exit') {
   console.log(`Chat Ai Has Ended`)
   sigma()
@@ -576,7 +576,7 @@ Github
 YouTube ( Music )
 Allah SWT
 `
-permen.question('[\x1b[1m\x1b[32mPermenMD Console\x1b[0m]: \n', (input) => {
+permen.question('[\x1b[1m\x1b[32mDirzx Console\x1b[0m]: \n', (input) => {
   const [command, ...args] = input.trim().split(/\s+/);
 
   if (command === 'help') {
@@ -641,7 +641,7 @@ ${creatorCredits}`);
   } else if (command === 'track-ip') {
     trackIP(args);
   } else if (command === 'ai') {
-    console.log(`PermenMD Ai Ragbot Started
+    console.log(`Dirzx Ai Ragbot Started
 Type "exit" To Stop Chat`);
     chat_ai()
   } else if (command === 'mc-flood') {
