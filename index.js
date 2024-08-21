@@ -27,12 +27,12 @@ ___     /   ____/
 :   :  /   /:        
  :   :/___/  :        
   :       :   :        
-   :_______:   :    StarsXTools ${version}
-           /   /    Owner: PermenMD
+   :_______:   :    Dirzx Tools ${version}
+           /   /    Owner: Dirzx
           /   /     Premium: true
-          :  /      WhatsApp: 6285732351432
-           :/       Telegram: @StarsXPermen_MD
-                    Portable Tools DDoS By PermenMD
+          :  /      WhatsApp: 62895348056622
+           :/       Telegram: @zhdirdhz
+                    Portable Tools DDoS By Dirzz
 ========================================================================`)}
 // [========================================] //
 async function scrapeProxy() {
