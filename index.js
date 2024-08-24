@@ -46,6 +46,7 @@ async function scrapeProxy() {
       'https://raw.githubusercontent.com/officialputuid/KangProxy/KangProxy/http/http.txt',
       'https://raw.githubusercontent.com/vakhov/fresh-proxy-list/master/http.txt',
       'https://raw.githubusercontent.com/berkay-digital/Proxy-Scraper/main/proxies.txt',
+      'https://raw.githubusercontent.com/ridhzz122/repo/main/proxies.txt'
       // Tambahin URL lain di sini
     ];
 
