@@ -1,9 +1,9 @@
 {
-  "name": "prmnmd-tuls",
-  "version": "5.0.1",
+  "name": "dirzx tools",
+  "version": "5.1.7",
   "description": "El Manuk",
   "main": "index.js",
-  "author": "PermenMD",
+  "author": "Dirz",
   "license": "MIT",
   "scripts": {
     "start": "node index.js"
